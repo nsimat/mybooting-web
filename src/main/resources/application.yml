@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    group:
+      <group>: dev
+server:
+  port: 8001
+---
+spring:
+  profiles:
+    group:
+      <group>: test
+server:
+  port: 9001
