@@ -1,6 +1,7 @@
 package com.nsimat.lil.sbet.landon.roomwebapp.controllers;
 
 import com.nsimat.lil.sbet.landon.roomwebapp.models.Room;
+import com.nsimat.lil.sbet.landon.roomwebapp.services.RoomService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +14,16 @@ import java.util.List;
 @RequestMapping("/rooms")
 public class RoomController {
 
-    private static final List<Room> rooms = new ArrayList<>();
-    static {
-       for (int i = 0; i < 10; i++){
-           rooms.add(new Room(i, "Room "+i, "R"+i, "Q"));
-       }
+    private final RoomService roomService;
+
+    public RoomController(RoomService roomService) {
+        this.roomService = roomService;
     }
 
     @GetMapping
     public String getAllRooms(Model model){
+
+        List<Room> rooms = roomService.getAllRooms();
         model.addAttribute("rooms", rooms);
         return "rooms";
     }
