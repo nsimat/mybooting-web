@@ -1,5 +1,6 @@
 package com.nsimat.lil.sbet.landon.roomwebapp.services;
 
+import com.nsimat.lil.sbet.landon.roomwebapp.data.StaffRepository;
 import com.nsimat.lil.sbet.landon.roomwebapp.models.Position;
 import com.nsimat.lil.sbet.landon.roomwebapp.models.StaffMember;
 import org.springframework.stereotype.Service;
@@ -10,16 +11,13 @@ import java.util.UUID;
 
 @Service
 public class StaffService {
-    private static final List<StaffMember> staff = new ArrayList<>();
+    private final StaffRepository staffRepository;
 
-    static{
-        staff.add(new StaffMember(UUID.randomUUID().toString(), "John", "Guruma", Position.CONCIERGE));
-        staff.add(new StaffMember(UUID.randomUUID().toString(), "Brian", "Kapesa", Position.FRONT_DESK));
-        staff.add(new StaffMember(UUID.randomUUID().toString(), "Mike", "Matondo", Position.SECURITY));
-        staff.add(new StaffMember(UUID.randomUUID().toString(), "Clarisse", "Ouedraogo", Position.HOUSEKEEPING));
+    public StaffService(StaffRepository staffRepository) {
+        this.staffRepository = staffRepository;
     }
 
     public List<StaffMember> getAllStaff(){
-        return staff;
+        return staffRepository.findAll();
     }
 }
