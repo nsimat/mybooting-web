@@ -3,7 +3,7 @@ package com.nsimat.lil.sbet.landon.roomwebapp.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ROOM")
+@Table(name = "Room")
 public class Room {
 
     @Id
@@ -20,7 +20,7 @@ public class Room {
     public Room() {
     }
 
-    public Room(long id, String number, String name, String info) {
+    public Room(String number, String name, String info) {
         this.id = id;
         this.number = number;
         this.name = name;
