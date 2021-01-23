@@ -5,7 +5,9 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Runner  implements CommandLineRunner {
 
     private final RabbitTemplate rabbitTemplate;
@@ -25,7 +27,9 @@ public class Runner  implements CommandLineRunner {
         AsyncPayload payload = new AsyncPayload();
         payload.setId(index);
         payload.setModel("ROOM");
-        rabbitTemplate.convertAndSend("operations", "landon.rooms.cleaner", objectMapper.writeValueAsString(payload));
+        rabbitTemplate.convertAndSend("operations",
+                             "landon.rooms.cleaner",
+                                       objectMapper.writeValueAsString(payload));
         context.close();
     }
 }
